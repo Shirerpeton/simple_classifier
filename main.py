@@ -66,7 +66,7 @@ def next_batch(num, data, labels):
 learning_rate = 1e-4
 batch_size = 32
 n_iterations = 10000
-dropout = 1
+dropout = 0.8
 			
 n_input = 785   # input layer (28x28 pixels)
 n_hidden1 = 128 # 1st hidden layer
@@ -99,7 +99,7 @@ layer_drop = tf.nn.dropout(layer_3, keep_prob)
 output_layer = tf.matmul(layer_3, weights['out']) + biases['out']
 
 cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=Y, logits=output_layer))
-train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
+train_step = tf.train.AdamOptimizer(learning_rate).minimize(cross_entropy)
 
 pred_vec = output_layer
 
